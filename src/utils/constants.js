@@ -24,3 +24,15 @@ export const walletInitialState = {
   method: 'Dinheiro',
   tag: 'Alimentação',
 };
+
+export const expenseTableHeader = [
+  'Descrição',
+  'Tag',
+  'Método de pagamento',
+  'Valor',
+  'Moeda',
+  'Câmbio utilizado',
+  'Valor convertido',
+  'Moeda de conversão',
+  'Editar/Excluir',
+];

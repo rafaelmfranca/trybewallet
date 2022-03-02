@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrencies, addExpense } from '../actions';
 import ExpenseForm from '../components/ExpenseForm';
+import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
 import { walletInitialState } from '../utils/constants';
 
@@ -48,12 +49,15 @@ class Wallet extends Component {
         <Header />
         {error && <div>{error}</div>}
         {isFetching && <div>Loading...</div>}
-        {!isFetching && !error && (
-          <ExpenseForm
-            { ...this.state }
-            handleChange={ this.handleChange }
-            handleSubmit={ this.handleSubmit }
-          />
+        {!error && (
+          <>
+            <ExpenseForm
+              { ...this.state }
+              handleChange={ this.handleChange }
+              handleSubmit={ this.handleSubmit }
+            />
+            <ExpenseTable />
+          </>
         )}
       </>
     );
