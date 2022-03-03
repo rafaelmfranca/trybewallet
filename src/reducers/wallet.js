@@ -3,6 +3,7 @@ import {
   FAILED_REQUEST,
   GET_CURRENCIES,
   SET_EXPENSE,
+  REMOVE_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -26,6 +27,11 @@ const wallet = (state = INITIAL_STATE, { type, payload }) => {
       isFetching: false,
       expenses: [...state.expenses, payload],
       error: '',
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== payload),
     };
   default:
     return state;

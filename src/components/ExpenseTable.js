@@ -1,9 +1,11 @@
 import { array } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { FaTrash } from 'react-icons/fa';
 import { expenseTableHeader } from '../utils/constants';
+import Button from './Button';
 
-const ExpenseTable = ({ expenses }) => (
+const ExpenseTable = ({ handleRemoveClick, expenses }) => (
   <table>
     <thead>
       <tr>
@@ -25,6 +27,14 @@ const ExpenseTable = ({ expenses }) => (
             <td>{Number(currCurrency.ask).toFixed(2)}</td>
             <td>{(expense.value * Number(currCurrency.ask)).toFixed(2)}</td>
             <td>Real</td>
+            <td>
+              <Button
+                type="button"
+                value={ <FaTrash /> }
+                data-testid="delete-btn"
+                onClick={ () => handleRemoveClick(expense.id) }
+              />
+            </td>
           </tr>
         );
       })}

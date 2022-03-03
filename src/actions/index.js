@@ -5,6 +5,7 @@ export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const SET_EXPENSE = 'SET_EXPENSE';
 export const REQUEST_API = 'REQUEST_API';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const loginAction = (payload) => ({
   type: LOGIN,
@@ -27,6 +28,11 @@ export const requestApiAction = () => ({
 
 export const requestFailedAction = (payload) => ({
   type: FAILED_REQUEST,
+  payload,
+});
+
+export const removeExpenseAction = (payload) => ({
+  type: REMOVE_EXPENSE,
   payload,
 });
 

@@ -1,18 +1,18 @@
-import { func, bool, number, string } from 'prop-types';
+import { func, bool, string } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCurrencies, addExpense } from '../actions';
+import { getCurrencies, addExpense, removeExpenseAction } from '../actions';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
 import { walletInitialState } from '../utils/constants';
 
 class Wallet extends Component {
-  constructor({ numberOfExpenses }) {
+  constructor() {
     super();
 
     this.state = {
-      id: numberOfExpenses,
+      id: 0,
       ...walletInitialState,
     };
   }
@@ -32,6 +32,11 @@ class Wallet extends Component {
     dispatch(addExpense(this.state));
     this.updateIdCounter();
     this.clearAllFields();
+  };
+
+  handleRemoveClick = (id) => {
+    const { dispatch } = this.props;
+    dispatch(removeExpenseAction(id));
   };
 
   updateIdCounter = () => {
@@ -56,7 +61,7 @@ class Wallet extends Component {
               handleChange={ this.handleChange }
               handleSubmit={ this.handleSubmit }
             />
-            <ExpenseTable />
+            <ExpenseTable handleRemoveClick={ this.handleRemoveClick } />
           </>
         )}
       </>
@@ -67,12 +72,10 @@ class Wallet extends Component {
 Wallet.propTypes = {
   dispatch: func,
   isFetching: bool,
-  numberOfExpenses: number,
   error: string,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  numberOfExpenses: state.wallet.expenses.length,
   isFetching: state.wallet.isFetching,
   error: state.wallet.error,
 });
