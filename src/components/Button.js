@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import React from 'react';
 
 const Button = (props) => {
@@ -9,8 +9,6 @@ const Button = (props) => {
     </button>
   );
 };
-
-const { string } = PropTypes;
 
 Button.propTypes = {
   type: string,

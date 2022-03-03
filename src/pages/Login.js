@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { func, object } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
@@ -54,8 +54,6 @@ class Login extends Component {
     );
   }
 }
-
-const { func, object } = PropTypes;
 
 Login.propTypes = {
   history: object,
