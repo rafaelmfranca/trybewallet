@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import React from 'react';
 
 const Input = (props) => {
@@ -10,8 +10,6 @@ const Input = (props) => {
     </label>
   );
 };
-
-const { string } = PropTypes;
 
 Input.propTypes = {
   label: string,

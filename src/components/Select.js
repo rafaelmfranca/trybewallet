@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string, array } from 'prop-types';
 import React from 'react';
 
 const Select = (props) => {
@@ -16,8 +16,6 @@ const Select = (props) => {
     </label>
   );
 };
-
-const { string, array } = PropTypes;
 
 Select.propTypes = {
   label: string,

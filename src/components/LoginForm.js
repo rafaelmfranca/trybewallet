@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string, func, boolean } from 'prop-types';
 import React from 'react';
 import Input from './Input';
 import Button from './Button';
@@ -30,8 +30,6 @@ const LoginForm = ({
     <Button type="submit" value="Entrar" disabled={ disabled } />
   </form>
 );
-
-const { string, func, boolean } = PropTypes;
 
 LoginForm.propTypes = {
   email: string,

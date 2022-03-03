@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { func, bool, number, string } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrencies, addExpense } from '../actions';
@@ -63,8 +63,6 @@ class Wallet extends Component {
     );
   }
 }
-
-const { func, bool, number, string } = PropTypes;
 
 Wallet.propTypes = {
   dispatch: func,

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string, array, func } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Input from './Input';
@@ -63,8 +63,6 @@ const ExpenseForm = ({
     <Button type="submit" value="Adicionar despesa" />
   </form>
 );
-
-const { string, array, func } = PropTypes;
 
 ExpenseForm.propTypes = {
   currencies: array,

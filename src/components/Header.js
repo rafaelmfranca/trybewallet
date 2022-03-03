@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { array, string } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -17,8 +17,6 @@ const Header = ({ email, expenses }) => (
     </span>
   </header>
 );
-
-const { array, string } = PropTypes;
 
 Header.propTypes = {
   email: string,
