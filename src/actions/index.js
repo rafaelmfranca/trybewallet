@@ -6,6 +6,8 @@ export const SET_EXPENSE = 'SET_EXPENSE';
 export const REQUEST_API = 'REQUEST_API';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const SET_EDITED_EXPENSE = 'SET_EDITED_EXPENSE';
 
 export const loginAction = (payload) => ({
   type: LOGIN,
@@ -33,6 +35,15 @@ export const requestFailedAction = (payload) => ({
 
 export const removeExpenseAction = (payload) => ({
   type: REMOVE_EXPENSE,
+  payload,
+});
+
+export const editExpenseAction = () => ({
+  type: EDIT_EXPENSE,
+});
+
+export const setEditedExpenseAction = (payload) => ({
+  type: SET_EDITED_EXPENSE,
   payload,
 });
 

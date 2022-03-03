@@ -1,11 +1,11 @@
-import { array } from 'prop-types';
+import { array, func } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { expenseTableHeader } from '../utils/constants';
 import Button from './Button';
 
-const ExpenseTable = ({ handleRemoveClick, expenses }) => (
+const ExpenseTable = ({ handleEditClick, handleRemoveClick, expenses }) => (
   <table>
     <thead>
       <tr>
@@ -30,6 +30,12 @@ const ExpenseTable = ({ handleRemoveClick, expenses }) => (
             <td>
               <Button
                 type="button"
+                value={ <FaEdit /> }
+                data-testid="edit-btn"
+                onClick={ () => handleEditClick(expense.id) }
+              />
+              <Button
+                type="button"
                 value={ <FaTrash /> }
                 data-testid="delete-btn"
                 onClick={ () => handleRemoveClick(expense.id) }
@@ -44,6 +50,8 @@ const ExpenseTable = ({ handleRemoveClick, expenses }) => (
 
 ExpenseTable.propTypes = {
   expenses: array,
+  handleRemoveClick: func,
+  handleEditClick: func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({

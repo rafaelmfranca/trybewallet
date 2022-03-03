@@ -14,9 +14,11 @@ const ExpenseForm = ({
   tag,
   handleChange,
   handleSubmit,
+  handleEditedExpenseSubmit,
   currencies,
+  isEditing,
 }) => (
-  <form onSubmit={ handleSubmit }>
+  <form onSubmit={ isEditing ? handleEditedExpenseSubmit : handleSubmit }>
     <Input
       type="number"
       label="Valor"
@@ -60,7 +62,10 @@ const ExpenseForm = ({
       value={ tag }
       data-testid="tag-input"
     />
-    <Button type="submit" value="Adicionar despesa" />
+    <Button
+      type="submit"
+      value={ isEditing ? 'Editar despesa' : 'Adicionar despesa' }
+    />
   </form>
 );
 
@@ -70,6 +75,7 @@ ExpenseForm.propTypes = {
   description: string,
   handleChange: func,
   handleSubmit: func,
+  handleEditedExpenseSubmit: func,
   method: string,
   tag: string,
   value: string,
@@ -77,6 +83,8 @@ ExpenseForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+  isEditing: state.wallet.isEditing,
 });
 
 export default connect(mapStateToProps)(ExpenseForm);

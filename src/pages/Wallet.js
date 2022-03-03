@@ -1,7 +1,13 @@
-import { func, bool, string } from 'prop-types';
+import { func, bool, string, array } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCurrencies, addExpense, removeExpenseAction } from '../actions';
+import {
+  getCurrencies,
+  addExpense,
+  removeExpenseAction,
+  editExpenseAction,
+  setEditedExpenseAction,
+} from '../actions';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
@@ -17,21 +23,21 @@ class Wallet extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getCurrencies());
+    await dispatch(getCurrencies());
   }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
-    dispatch(addExpense(this.state));
+    await dispatch(addExpense(this.state));
     this.updateIdCounter();
-    this.clearAllFields();
+    this.resetAllFields();
   };
 
   handleRemoveClick = (id) => {
@@ -39,12 +45,30 @@ class Wallet extends Component {
     dispatch(removeExpenseAction(id));
   };
 
-  updateIdCounter = () => {
-    this.setState(({ id: prevId }) => ({ id: prevId + 1 }));
+  handleEditClick = (id) => {
+    const { dispatch, expenses } = this.props;
+    dispatch(editExpenseAction());
+    const expenseToEdit = expenses.find((expense) => expense.id === id);
+    this.setState({ ...expenseToEdit });
   };
 
-  clearAllFields = () => {
-    this.setState((prevState) => ({ ...prevState, ...walletInitialState }));
+  handleEditedExpenseSubmit = (e) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(setEditedExpenseAction(this.state));
+    this.updateIdCounter();
+    this.resetAllFields();
+  };
+
+  updateIdCounter = () => {
+    const { expenses } = this.props;
+    const ids = expenses.map(({ id }) => id);
+    const lastId = Math.max(...ids);
+    this.setState({ id: lastId + 1 });
+  };
+
+  resetAllFields = () => {
+    this.setState(({ id }) => ({ id, ...walletInitialState }));
   };
 
   render() {
@@ -60,8 +84,12 @@ class Wallet extends Component {
               { ...this.state }
               handleChange={ this.handleChange }
               handleSubmit={ this.handleSubmit }
+              handleEditedExpenseSubmit={ this.handleEditedExpenseSubmit }
             />
-            <ExpenseTable handleRemoveClick={ this.handleRemoveClick } />
+            <ExpenseTable
+              handleEditClick={ this.handleEditClick }
+              handleRemoveClick={ this.handleRemoveClick }
+            />
           </>
         )}
       </>
@@ -73,11 +101,13 @@ Wallet.propTypes = {
   dispatch: func,
   isFetching: bool,
   error: string,
+  expenses: array,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   isFetching: state.wallet.isFetching,
   error: state.wallet.error,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Wallet);
