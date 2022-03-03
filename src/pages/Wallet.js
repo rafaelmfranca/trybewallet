@@ -1,4 +1,4 @@
-import { func, bool, string, array } from 'prop-types';
+import { func, bool, string, array, number } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -61,10 +61,8 @@ class Wallet extends Component {
   };
 
   updateIdCounter = () => {
-    const { expenses } = this.props;
-    const ids = expenses.map(({ id }) => id);
-    const lastId = Math.max(...ids);
-    this.setState({ id: lastId + 1 });
+    const { lastExpenseId } = this.props;
+    this.setState({ id: lastExpenseId + 1 });
   };
 
   resetAllFields = () => {
@@ -102,12 +100,14 @@ Wallet.propTypes = {
   isFetching: bool,
   error: string,
   expenses: array,
+  lastExpenseId: number,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   isFetching: state.wallet.isFetching,
   error: state.wallet.error,
   expenses: state.wallet.expenses,
+  lastExpenseId: state.wallet.lastExpenseId,
 });
 
 export default connect(mapStateToProps)(Wallet);

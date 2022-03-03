@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   error: '',
   currencies: [],
   expenses: [],
+  lastExpenseId: 0,
 };
 
 const wallet = (state = INITIAL_STATE, { type, payload }) => {
@@ -29,6 +30,7 @@ const wallet = (state = INITIAL_STATE, { type, payload }) => {
       ...state,
       isFetching: false,
       expenses: [...state.expenses, payload],
+      lastExpenseId: payload.id,
       error: '',
     };
   case REMOVE_EXPENSE:
