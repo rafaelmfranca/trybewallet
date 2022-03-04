@@ -14,14 +14,10 @@ import Header from '../components/Header';
 import { walletInitialState } from '../utils/constants';
 
 class Wallet extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      id: 0,
-      ...walletInitialState,
-    };
-  }
+  state = {
+    id: 0,
+    ...walletInitialState,
+  };
 
   async componentDidMount() {
     const { dispatch } = this.props;
