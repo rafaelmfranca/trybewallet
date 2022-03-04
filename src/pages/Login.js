@@ -6,15 +6,11 @@ import { loginAction } from '../actions/index';
 import { EMAIL_REGEX, PASSWORD_MIN_LENGTH } from '../utils/constants';
 
 class Login extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      email: '',
-      password: '',
-      disabled: true,
-    };
-  }
+  state = {
+    email: '',
+    password: '',
+    disabled: true,
+  };
 
   validateEmail = () => {
     const { email } = this.state;
@@ -30,7 +26,7 @@ class Login extends Component {
     const flag = this.validateEmail() && this.validatePassword();
     if (flag) this.setState({ disabled: false });
     else this.setState({ disabled: true });
-  }
+  };
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value }, this.handleSignIn);
