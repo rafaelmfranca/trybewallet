@@ -10,6 +10,9 @@ const StyledButton = styled.button`
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #0500f5;
   transition: background-color 0.2s ease-in-out;
 

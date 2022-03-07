@@ -12,6 +12,7 @@ import ExpenseForm from '../components/ExpenseForm';
 import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
 import { walletInitialState } from '../utils/constants';
+import WalletWrapper from '../styles/components/WalletWrapper';
 
 class Wallet extends Component {
   state = {
@@ -68,7 +69,7 @@ class Wallet extends Component {
   render() {
     const { error, isFetching } = this.props;
     return (
-      <>
+      <WalletWrapper>
         <Header />
         {error && <div>{error}</div>}
         {isFetching && <div>Loading...</div>}
@@ -86,7 +87,7 @@ class Wallet extends Component {
             />
           </>
         )}
-      </>
+      </WalletWrapper>
     );
   }
 }

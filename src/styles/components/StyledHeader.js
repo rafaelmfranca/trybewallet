@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 0 0 5px 5px;
 
   & div:nth-of-type(1) {
     width: 25%;

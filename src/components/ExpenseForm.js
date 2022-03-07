@@ -5,6 +5,7 @@ import Input from './Input';
 import Select from './Select';
 import { PAYMENT_METHODS, EXPENSE_TAGS } from '../utils/constants';
 import Button from './Button';
+import StyledExpenseForm from '../styles/components/StyledExpenseForm';
 
 const ExpenseForm = ({
   value,
@@ -18,7 +19,9 @@ const ExpenseForm = ({
   currencies,
   isEditing,
 }) => (
-  <form onSubmit={ isEditing ? handleEditedExpenseSubmit : handleSubmit }>
+  <StyledExpenseForm
+    onSubmit={ isEditing ? handleEditedExpenseSubmit : handleSubmit }
+  >
     <Input
       type="number"
       label="Valor"
@@ -66,7 +69,7 @@ const ExpenseForm = ({
       type="submit"
       value={ isEditing ? 'Editar despesa' : 'Adicionar despesa' }
     />
-  </form>
+  </StyledExpenseForm>
 );
 
 ExpenseForm.propTypes = {
