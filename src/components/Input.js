@@ -1,12 +1,13 @@
 import { string } from 'prop-types';
 import React from 'react';
+import StyledInput from '../styles/components/StyledInput';
 
 const Input = (props) => {
   const { name, label } = props;
   return (
     <label htmlFor={ name }>
-      {label}
-      <input { ...props } />
+      <small style={ { color: '#505050' } }><strong>{label}</strong></small>
+      <StyledInput { ...props } />
     </label>
   );
 };

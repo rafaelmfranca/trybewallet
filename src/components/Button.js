@@ -1,12 +1,13 @@
 import { string } from 'prop-types';
 import React from 'react';
+import StyledButton from '../styles/components/StyledButton';
 
 const Button = (props) => {
   const { type, value } = props;
   return (
-    <button { ...props } type={ type === 'button' ? 'button' : 'submit' }>
+    <StyledButton { ...props } type={ type === 'button' ? 'button' : 'submit' }>
       {value}
-    </button>
+    </StyledButton>
   );
 };
 

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
 import { loginAction } from '../actions/index';
 import { EMAIL_REGEX, PASSWORD_MIN_LENGTH } from '../utils/constants';
+import MainWrapper from '../styles/components/Wrapper';
+import LoginWrapper from '../styles/components/LoginWrapper';
 
 class Login extends Component {
   state = {
@@ -42,11 +44,15 @@ class Login extends Component {
 
   render() {
     return (
-      <LoginForm
-        { ...this.state }
-        handleChange={ this.handleChange }
-        handleSubmit={ this.handleSubmit }
-      />
+      <MainWrapper>
+        <LoginWrapper>
+          <LoginForm
+            { ...this.state }
+            handleChange={ this.handleChange }
+            handleSubmit={ this.handleSubmit }
+          />
+        </LoginWrapper>
+      </MainWrapper>
     );
   }
 }

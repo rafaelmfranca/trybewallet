@@ -2,6 +2,7 @@ import { string, func, boolean } from 'prop-types';
 import React from 'react';
 import Input from './Input';
 import Button from './Button';
+import Logo from './Logo';
 
 const LoginForm = ({
   email,
@@ -11,16 +12,17 @@ const LoginForm = ({
   handleSubmit,
 }) => (
   <form onSubmit={ handleSubmit }>
+    <Logo />
     <Input
       type="text"
-      label="Email"
+      label="E-mail"
       value={ email }
       name="email"
       onChange={ handleChange }
       data-testid="email-input"
     />
     <Input
-      type="text"
+      type="password"
       label="Senha"
       name="password"
       value={ password }
