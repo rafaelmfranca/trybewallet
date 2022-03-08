@@ -13,16 +13,16 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0500f5;
-  transition: background-color 0.2s ease-in-out;
+  background-color: #39A0ED;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #66B5FF;
+    opacity: 0.7;
   }
 
   &:disabled {
     cursor: not-allowed;
-    background-color: #66B5FF;
+    opacity: 0.7;
   }
 `;
 

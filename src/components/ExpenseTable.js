@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { expenseTableHeader } from '../utils/constants';
 import Button from './Button';
+import StyledExpenseTable from '../styles/components/StyledExpenseTable';
 
 const ExpenseTable = ({ handleEditClick, handleRemoveClick, expenses }) => (
-  <table>
+  <StyledExpenseTable>
     <thead>
       <tr>
         {expenseTableHeader.map((item) => (
@@ -45,7 +46,7 @@ const ExpenseTable = ({ handleEditClick, handleRemoveClick, expenses }) => (
         );
       })}
     </tbody>
-  </table>
+  </StyledExpenseTable>
 );
 
 ExpenseTable.propTypes = {

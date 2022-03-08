@@ -16,7 +16,7 @@ const StyledLogo = styled.div`
     color: #505050;
 
     & svg {
-      color: #0500f5;
+      color: #39A0ED;
       font-size: 1.6rem;
     }
   }
