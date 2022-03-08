@@ -1,13 +1,13 @@
 import fetchExchangeRates from '../services/exchangeRatesApi';
 
-export const LOGIN = 'LOGIN';
-export const GET_CURRENCIES = 'GET_CURRENCIES';
-export const SET_EXPENSE = 'SET_EXPENSE';
+export const LOGIN = '@user/LOGIN';
+export const GET_CURRENCIES = '@wallet/GET_CURRENCIES';
+export const SET_EXPENSE = '@wallet/SET_EXPENSE';
+export const REMOVE_EXPENSE = '@wallet/REMOVE_EXPENSE';
+export const EDIT_EXPENSE = '@wallet/EDIT_EXPENSE';
+export const SAVE_EDITED_EXPENSE = '@wallet/SAVE_EDITED_EXPENSE';
 export const REQUEST_API = 'REQUEST_API';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
-export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
-export const EDIT_EXPENSE = 'EDIT_EXPENSE';
-export const SET_EDITED_EXPENSE = 'SET_EDITED_EXPENSE';
 
 export const loginAction = (payload) => ({
   type: LOGIN,
@@ -42,12 +42,12 @@ export const editExpenseAction = () => ({
   type: EDIT_EXPENSE,
 });
 
-export const setEditedExpenseAction = (payload) => ({
-  type: SET_EDITED_EXPENSE,
+export const saveEditedExpenseAction = (payload) => ({
+  type: SAVE_EDITED_EXPENSE,
   payload,
 });
 
-export const addExpense = (state) => async (dispatch) => {
+export const addExpenseThunk = (state) => async (dispatch) => {
   dispatch(requestApiAction());
   try {
     const data = await fetchExchangeRates();
@@ -58,7 +58,7 @@ export const addExpense = (state) => async (dispatch) => {
   }
 };
 
-export const getCurrencies = () => async (dispatch) => {
+export const getCurrenciesThunk = () => async (dispatch) => {
   dispatch(requestApiAction());
   try {
     const data = await fetchExchangeRates();

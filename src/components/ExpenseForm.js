@@ -5,6 +5,7 @@ import Input from './Input';
 import Select from './Select';
 import { PAYMENT_METHODS, EXPENSE_TAGS } from '../utils/constants';
 import Button from './Button';
+import StyledExpenseForm from '../styles/components/StyledExpenseForm';
 
 const ExpenseForm = ({
   value,
@@ -13,12 +14,14 @@ const ExpenseForm = ({
   method,
   tag,
   handleChange,
-  handleSubmit,
+  handleExpenseSubmit,
   handleEditedExpenseSubmit,
   currencies,
   isEditing,
 }) => (
-  <form onSubmit={ isEditing ? handleEditedExpenseSubmit : handleSubmit }>
+  <StyledExpenseForm
+    onSubmit={ isEditing ? handleEditedExpenseSubmit : handleExpenseSubmit }
+  >
     <Input
       type="number"
       label="Valor"
@@ -66,7 +69,7 @@ const ExpenseForm = ({
       type="submit"
       value={ isEditing ? 'Editar despesa' : 'Adicionar despesa' }
     />
-  </form>
+  </StyledExpenseForm>
 );
 
 ExpenseForm.propTypes = {
@@ -74,17 +77,17 @@ ExpenseForm.propTypes = {
   currency: string,
   description: string,
   handleChange: func,
-  handleSubmit: func,
+  handleExpenseSubmit: func,
   handleEditedExpenseSubmit: func,
   method: string,
   tag: string,
   value: string,
 }.isRequired;
 
-const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
-  isEditing: state.wallet.isEditing,
+const mapStateToProps = ({ wallet }) => ({
+  currencies: wallet.currencies,
+  expenses: wallet.expenses,
+  isEditing: wallet.isEditing,
 });
 
 export default connect(mapStateToProps)(ExpenseForm);
