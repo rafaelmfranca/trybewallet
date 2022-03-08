@@ -5,7 +5,7 @@ import {
   SET_EXPENSE,
   REMOVE_EXPENSE,
   EDIT_EXPENSE,
-  SET_EDITED_EXPENSE,
+  SAVE_EDITED_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -43,14 +43,12 @@ const wallet = (state = INITIAL_STATE, { type, payload }) => {
       ...state,
       isEditing: true,
     };
-  case SET_EDITED_EXPENSE:
+  case SAVE_EDITED_EXPENSE:
     return {
       ...state,
       isEditing: false,
       expenses: state.expenses.map((expense) => {
-        if (expense.id === payload.id) {
-          return { ...payload, exchangeRates: expense.exchangeRates };
-        }
+        if (expense.id === payload.id) return payload;
         return expense;
       }),
     };

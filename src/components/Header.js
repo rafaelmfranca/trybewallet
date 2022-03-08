@@ -9,7 +9,7 @@ import HeaderInfo from '../styles/components/HeaderInfo';
 
 const updateTotalExpense = (expenses) => expenses
   .reduce((acc, { value, currency, exchangeRates }) => {
-    acc += +value * +exchangeRates[currency].ask;
+    acc += Number(value) * Number(exchangeRates[currency].ask);
     return acc;
   }, 0);
 
@@ -36,9 +36,9 @@ Header.propTypes = {
   expenses: array,
 }.isRequired;
 
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-  expenses: state.wallet.expenses,
+const mapStateToProps = ({ user, wallet }) => ({
+  email: user.email,
+  expenses: wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

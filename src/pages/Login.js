@@ -36,9 +36,9 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { history, dispatch } = this.props;
+    const { history, login } = this.props;
     const { email } = this.state;
-    dispatch(loginAction({ email }));
+    login({ email });
     history.push('/carteira');
   };
 
@@ -60,6 +60,11 @@ class Login extends Component {
 Login.propTypes = {
   history: object,
   dispatch: func,
+  login: func,
 }.isRequired;
 
-export default connect()(Login);
+const mapDispatchToProps = (dispatch) => ({
+  login: (email) => dispatch(loginAction(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

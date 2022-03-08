@@ -2,11 +2,11 @@ import { func, bool, string, array, number } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  getCurrencies,
-  addExpense,
+  getCurrenciesThunk,
+  addExpenseThunk,
   removeExpenseAction,
   editExpenseAction,
-  setEditedExpenseAction,
+  saveEditedExpenseAction,
 } from '../actions';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpenseTable from '../components/ExpenseTable';
@@ -21,38 +21,38 @@ class Wallet extends Component {
   };
 
   async componentDidMount() {
-    const { dispatch } = this.props;
-    await dispatch(getCurrencies());
+    const { getCurrencies } = this.props;
+    await getCurrencies();
   }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = async (e) => {
+  handleExpenseSubmit = async (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    await dispatch(addExpense(this.state));
+    const { addExpense } = this.props;
+    await addExpense(this.state);
     this.updateIdCounter();
     this.resetAllFields();
   };
 
   handleRemoveClick = (id) => {
-    const { dispatch } = this.props;
-    dispatch(removeExpenseAction(id));
+    const { removeExpense } = this.props;
+    removeExpense(id);
   };
 
   handleEditClick = (id) => {
-    const { dispatch, expenses } = this.props;
-    dispatch(editExpenseAction());
+    const { editExpense, expenses } = this.props;
+    editExpense();
     const expenseToEdit = expenses.find((expense) => expense.id === id);
     this.setState({ ...expenseToEdit });
   };
 
   handleEditedExpenseSubmit = (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(setEditedExpenseAction(this.state));
+    const { saveEditedExpense } = this.props;
+    saveEditedExpense(this.state);
     this.updateIdCounter();
     this.resetAllFields();
   };
@@ -63,7 +63,7 @@ class Wallet extends Component {
   };
 
   resetAllFields = () => {
-    this.setState(({ id }) => ({ id, ...walletInitialState }));
+    this.setState((state) => ({ ...state, ...walletInitialState }));
   };
 
   render() {
@@ -78,7 +78,7 @@ class Wallet extends Component {
             <ExpenseForm
               { ...this.state }
               handleChange={ this.handleChange }
-              handleSubmit={ this.handleSubmit }
+              handleExpenseSubmit={ this.handleExpenseSubmit }
               handleEditedExpenseSubmit={ this.handleEditedExpenseSubmit }
             />
             <ExpenseTable
@@ -98,13 +98,26 @@ Wallet.propTypes = {
   error: string,
   expenses: array,
   lastExpenseId: number,
+  saveEditedExpense: func,
+  editExpense: func,
+  removeExpense: func,
+  addExpense: func,
+  getCurrencies: func,
 }.isRequired;
 
-const mapStateToProps = (state) => ({
-  isFetching: state.wallet.isFetching,
-  error: state.wallet.error,
-  expenses: state.wallet.expenses,
-  lastExpenseId: state.wallet.lastExpenseId,
+const mapStateToProps = ({ wallet }) => ({
+  isFetching: wallet.isFetching,
+  error: wallet.error,
+  expenses: wallet.expenses,
+  lastExpenseId: wallet.lastExpenseId,
 });
 
-export default connect(mapStateToProps)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(getCurrenciesThunk()),
+  addExpense: (state) => dispatch(addExpenseThunk(state)),
+  removeExpense: (id) => dispatch(removeExpenseAction(id)),
+  editExpense: (id) => dispatch(editExpenseAction(id)),
+  saveEditedExpense: (expense) => dispatch(saveEditedExpenseAction(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
